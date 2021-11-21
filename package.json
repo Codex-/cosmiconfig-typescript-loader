@@ -2,15 +2,16 @@
   "name": "cosmiconfig-typescript-loader",
   "version": "1.0.0",
   "description": "TypeScript loader for cosmiconfig",
+  "author": "Alex Miller <codex.nz@gmail.com>",
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "format:check": "prettier --check \"{**/*,*}.{js,ts}\"",
     "format:write": "npm run format:check -- --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Alex Miller <codex.nz@gmail.com>",
-  "license": "MIT",
   "engines": {
     "node": ">=12",
     "npm": ">=7"
