@@ -3,7 +3,7 @@
     "target": "es2016",
     "module": "commonjs",
     "pretty": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": true,
 
     "outDir": "dist",
@@ -13,5 +13,7 @@
     "esModuleInterop": true,
     "isolatedModules": false,
     "strict": true
-  }
+  },
+  "include": ["lib"],
+  "exclude": ["**/__fixtures__/**/*", "**/*.spec.*"]
 }

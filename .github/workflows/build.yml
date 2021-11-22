@@ -23,6 +23,9 @@ jobs:
       - run: npm ci
       - name: build
         run: npm run build
+      - name: test
+        if: ${{ always() }}
+        run: npm run test
       - name: style
         if: ${{ always() }}
         run: npm run format:check

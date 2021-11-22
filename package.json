@@ -10,7 +10,7 @@
     "build": "tsc",
     "format:check": "prettier --check \"{**/*,*}.{js,ts}\"",
     "format:write": "npm run format:check -- --write",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "engines": {
     "node": ">=12",
@@ -24,7 +24,10 @@
     "ts-node": "^10.4.0"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.3.1",
     "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
     "typescript": "^4.5.2"
   }
 }

@@ -1,14 +1,24 @@
 import type { Loader } from "cosmiconfig";
 import { register, RegisterOptions } from "ts-node";
+import { TypeScriptCompileError } from "./typescript-compile-error";
 
-const TypeScriptLoader = (options?: RegisterOptions): Loader => {
+export function TypeScriptLoader(options?: RegisterOptions): Loader {
   return (path: string, content: string) => {
     try {
       register(options).compile(content, path);
       const result = require(path);
-      return result.default || result;
-    } catch (error) {}
-  };
-};
 
-export default TypeScriptLoader;
+      /**
+       * `default` is used when exporting using export default, some modules
+       * may still use `module.exports` or if in TS `export = `
+       */
+      return result.default || result;
+    } catch (error) {
+      if (error instanceof Error) {
+        // Coerce generic error instance into typed error with better logging.
+        throw TypeScriptCompileError.fromError(error);
+      }
+      throw error;
+    }
+  };
+}

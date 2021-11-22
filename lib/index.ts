@@ -1,4 +1,4 @@
-import loader from "./loader";
+import { TypeScriptLoader } from "./loader";
 
-export default loader;
+export default TypeScriptLoader;
 export type { TypeScriptCompileError } from "./typescript-compile-error";
