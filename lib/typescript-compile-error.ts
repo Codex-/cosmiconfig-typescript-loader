@@ -1,7 +1,7 @@
 export class TypeScriptCompileError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = this.constructor.name
+    this.name = this.constructor.name;
   }
 
   public static fromError(error: Error): TypeScriptCompileError {

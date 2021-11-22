@@ -1,0 +1,33 @@
+{
+  "plugins": ["import", "prettier"],
+  "extends": ["airbnb-typescript/base", "prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.test.json"
+  },
+  "ignorePatterns": ["lib/__fixtures__/**/*.ts", "jest.config.ts", "dist"],
+  "rules": {
+    "@typescript-eslint/await-thenable": "warn",
+    "@typescript-eslint/no-floating-promises": [
+      "warn",
+      { "ignoreIIFE": true, "ignoreVoid": false }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "import/order": "warn",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": true,
+        "peerDependencies": true
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "no-console": ["warn"],
+    "no-plusplus": "off",
+    "prettier/prettier": "warn",
+    "radix": ["error", "as-needed"]
+  }
+}

@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { Loader } from "cosmiconfig";
-
 import { TypeScriptLoader } from "./loader";
 import { TypeScriptCompileError } from "./typescript-compile-error";
 

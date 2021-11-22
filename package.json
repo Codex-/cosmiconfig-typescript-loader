@@ -10,6 +10,8 @@
     "build": "tsc",
     "format:check": "prettier --check \"{**/*,*}.{js,ts}\"",
     "format:write": "npm run format:check -- --write",
+    "lint": "eslint --ext \".js,.ts\" .",
+    "lint:fix": "npm run lint -- --fix",
     "test": "jest"
   },
   "engines": {
@@ -20,11 +22,17 @@
     "cosmiconfig": "^7"
   },
   "dependencies": {
-    "cosmiconfig": "^7.0.1",
+    "cosmiconfig": "^7",
     "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-typescript": "^16.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.3.1",
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.7",

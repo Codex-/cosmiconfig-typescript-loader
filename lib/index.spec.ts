@@ -1,6 +1,6 @@
-import TypeScriptLoader from ".";
-import { cosmiconfig, cosmiconfigSync } from "cosmiconfig";
 import path from "path";
+import { cosmiconfig, cosmiconfigSync } from "cosmiconfig";
+import TypeScriptLoader from ".";
 
 describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");

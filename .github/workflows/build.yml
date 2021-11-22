@@ -26,6 +26,9 @@ jobs:
       - name: test
         if: ${{ always() }}
         run: npm run test
+      - name: lint
+        if: ${{ always() }}
+        run: npm run lint
       - name: style
         if: ${{ always() }}
         run: npm run format:check
