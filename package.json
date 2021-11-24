@@ -19,7 +19,9 @@
     "npm": ">=7"
   },
   "peerDependencies": {
-    "cosmiconfig": "^7"
+    "@types/node": "*",
+    "cosmiconfig": ">=7",
+    "typescript": ">=3"
   },
   "dependencies": {
     "cosmiconfig": "^7",
