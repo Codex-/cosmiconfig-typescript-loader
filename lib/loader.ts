@@ -5,13 +5,15 @@ import { TypeScriptCompileError } from "./typescript-compile-error";
 export function TypeScriptLoader(options?: RegisterOptions): Loader {
   return (path: string, content: string) => {
     try {
-      register(options).compile(content, path);
+      // cosmiconfig requires the transpiled configuration to be CJS
+      register({ ...options, compilerOptions: { module: "commonjs" } }).compile(
+        content,
+        path
+      );
       const result = require(path);
 
-      /**
-       * `default` is used when exporting using export default, some modules
-       * may still use `module.exports` or if in TS `export = `
-       */
+      // `default` is used when exporting using export default, some modules
+      // may still use `module.exports` or if in TS `export = `
       return result.default || result;
     } catch (error) {
       if (error instanceof Error) {
