@@ -7,7 +7,7 @@ describe("TypeScriptLoader", () => {
 
   describe("exports", () => {
     it("should export the loader function as a default", () => {
-      expect(typeof TypeScriptLoader).toBe("function");
+      expect(typeof TypeScriptLoader).toStrictEqual("function");
     });
   });
 
@@ -22,7 +22,9 @@ describe("TypeScriptLoader", () => {
         path.resolve(fixturesPath, "valid.fixture.ts")
       );
 
-      expect(typeof loadedCfg?.config).toBe("object");
+      expect(typeof loadedCfg!.config).toStrictEqual("object");
+      expect(typeof loadedCfg!.config.test).toStrictEqual("object");
+      expect(loadedCfg!.config.test.cake).toStrictEqual("a lie");
     });
 
     it("should throw an error on loading an invalid TS file", async () => {
@@ -52,7 +54,9 @@ describe("TypeScriptLoader", () => {
         path.resolve(fixturesPath, "valid.fixture.ts")
       );
 
-      expect(typeof loadedCfg?.config).toBe("object");
+      expect(typeof loadedCfg!.config).toStrictEqual("object");
+      expect(typeof loadedCfg!.config.test).toStrictEqual("object");
+      expect(loadedCfg!.config.test.cake).toStrictEqual("a lie");
     });
 
     it("should throw an error on loading an invalid TS file", () => {
