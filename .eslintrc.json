@@ -4,7 +4,12 @@
   "parserOptions": {
     "project": "./tsconfig.test.json"
   },
-  "ignorePatterns": ["lib/__fixtures__/**/*.ts", "jest.config.ts", "dist"],
+  "ignorePatterns": [
+    "lib/__fixtures__/**/*.ts",
+    "jest.config.ts",
+    "coverage",
+    "dist"
+  ],
   "rules": {
     "@typescript-eslint/await-thenable": "warn",
     "@typescript-eslint/no-floating-promises": [
