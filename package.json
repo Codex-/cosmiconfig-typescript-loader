@@ -9,6 +9,14 @@
   "files": [
     "dist/**/*"
   ],
+  "homepage": "https://github.com/Codex-/cosmiconfig-typescript-loader",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Codex-/cosmiconfig-typescript-loader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Codex-/cosmiconfig-typescript-loader/issues"
+  },
   "scripts": {
     "build": "tsc",
     "format:check": "prettier --check \"{**/*,*}.{js,ts}\"",
