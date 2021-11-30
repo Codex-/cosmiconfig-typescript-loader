@@ -2,6 +2,10 @@
 
 > ⚙️🚀 TypeScript config file support for cosmiconfig
 
+[![build](https://github.com/Codex-/cosmiconfig-typescript-loader/actions/workflows/build.yml/badge.svg)](https://github.com/Codex-/cosmiconfig-typescript-loader/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/Codex-/cosmiconfig-typescript-loader/branch/main/graph/badge.svg?token=WWGNIPC249)](https://codecov.io/gh/Codex-/cosmiconfig-typescript-loader)
+[![npm](https://img.shields.io/npm/v/cosmiconfig-typescript-loader.svg)](https://www.npmjs.com/package/cosmiconfig-typescript-loader)
+
 ## `@endemolshinegroup/cosmiconfig-typescript-loader`
 
 This package serves as a drop in replacement for `@endemolshinegroup/cosmiconfig-typescript-loader`. At the time of publishing this, `endemolshinegroup` is not maintaining the original package. I can only assume this is to do with the fact that Endemol Shine Group [was purchased and absorbed by another business](https://en.wikipedia.org/wiki/Endemol_Shine_Group#Sale_to_Banijay). This discontinuation of development efforts towards the original package left any open issues and pull requests unresolved.
