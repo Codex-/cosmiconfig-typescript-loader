@@ -1,0 +1,49 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: choice
+        description: Version number to increment
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  release:
+    env:
+      CI: true
+      GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
+      NPM_OTP_TOKEN: ${{ github.event.inputs.otp }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js lts
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+      - name: Use NPM 8
+        run: npm i -g npm@8
+      - run: npm ci
+      - name: build
+        run: npm run build
+      # - name: test
+      #   if: ${{ always() }}
+      #   run: npm run test
+      # - name: lint
+      #   if: ${{ always() }}
+      #   run: npm run lint
+      # - name: style
+      #   if: ${{ always() }}
+      #   run: npm run format:check
+      - name: npm auth
+        run: npm set "//registry.npmjs.org/:_authToken" ${{ env.NPM_TOKEN }}
+      - name: perform release
+        run: |
+          npm run release -- \
+            ${{ github.event.inputs.version }} \
+            --ci \
+            --dry-run
