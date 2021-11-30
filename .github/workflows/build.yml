@@ -24,6 +24,7 @@ jobs:
       - name: build
         run: npm run build
       - name: test
+        id: test
         if: ${{ always() }}
         run: npm run test -- --coverage
       - name: Codecov
