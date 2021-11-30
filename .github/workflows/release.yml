@@ -30,20 +30,19 @@ jobs:
       - run: npm ci
       - name: build
         run: npm run build
-      # - name: test
-      #   if: ${{ always() }}
-      #   run: npm run test
-      # - name: lint
-      #   if: ${{ always() }}
-      #   run: npm run lint
-      # - name: style
-      #   if: ${{ always() }}
-      #   run: npm run format:check
+      - name: test
+        if: ${{ always() }}
+        run: npm run test
+      - name: lint
+        if: ${{ always() }}
+        run: npm run lint
+      - name: style
+        if: ${{ always() }}
+        run: npm run format:check
       - name: npm auth
         run: npm set "//registry.npmjs.org/:_authToken" ${{ env.NPM_TOKEN }}
       - name: perform release
         run: |
           npm run release -- \
             ${{ github.event.inputs.version }} \
-            --ci \
-            --dry-run
+            --ci
