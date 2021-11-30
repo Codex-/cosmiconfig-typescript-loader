@@ -41,6 +41,10 @@ jobs:
         run: npm run format:check
       - name: npm auth
         run: npm set "//registry.npmjs.org/:_authToken" ${{ env.NPM_TOKEN }}
+      - name: config git user
+        run: |
+          git config --global user.name ${{ secrets.ACTION_GITHUB_USERNAME }};
+          git config --global user.email ${{ secrets.ACTION_GITHUB_EMAIL }};
       - name: perform release
         run: |
           npm run release -- \
