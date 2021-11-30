@@ -1,6 +1,9 @@
 import type { Config } from "@jest/types";
 const config: Config.InitialOptions = {
-  collectCoverageFrom: ["lib\\__fixtures__", "!lib\\__fixtures__"],
+  collectCoverageFrom: [
+    "<rootDir>/lib/**/*",
+    "!<rootDir>/lib/__fixtures__/**/*",
+  ],
   globals: {
     "ts-jest": {
       tsconfig: "tsconfig.test.json",
