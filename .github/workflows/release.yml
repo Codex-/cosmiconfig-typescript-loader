@@ -6,9 +6,9 @@ on:
         type: choice
         description: Version number to increment
         options:
-          - major
-          - minor
           - patch
+          - minor
+          - major
 
 jobs:
   release:
