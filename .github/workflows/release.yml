@@ -34,9 +34,6 @@ jobs:
         id: test
         if: ${{ always() }}
         run: npm run test -- --coverage
-      - name: Codecov
-        if: steps.test.outcome == 'success'
-        uses: codecov/codecov-action@v2
       - name: lint
         if: ${{ always() }}
         run: npm run lint
@@ -54,3 +51,6 @@ jobs:
           npm run release -- \
             ${{ github.event.inputs.version }} \
             --ci
+      - name: codecov # Perform after version publishing
+        if: steps.test.outcome == 'success'
+        uses: codecov/codecov-action@v2
