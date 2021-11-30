@@ -26,13 +26,33 @@ jobs:
       - name: test
         id: test
         if: ${{ always() }}
-        run: npm run test -- --coverage
-      - name: Codecov
-        if: steps.test.outcome == 'success'
-        uses: codecov/codecov-action@v2
+        run: npm run test
       - name: lint
         if: ${{ always() }}
         run: npm run lint
       - name: style
         if: ${{ always() }}
         run: npm run format:check
+
+  codecov: # Send only a single coverage report per run
+    needs: build
+    timeout-minutes: 15
+    env:
+      CI: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js lts
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+          cache: npm
+      - name: Use NPM 8
+        run: npm i -g npm@8
+      - run: npm ci
+      - name: test
+        run: npm run test -- --coverage
+      - name: Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          verbose: true
