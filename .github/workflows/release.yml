@@ -5,6 +5,7 @@ on:
       version:
         type: choice
         description: Version number to increment
+        required: true
         options:
           - patch
           - minor
