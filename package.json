@@ -9,10 +9,10 @@
   "files": [
     "dist/**/*"
   ],
-  "homepage": "https://github.com/Codex-/cosmiconfig-typescript-loader",
+  "homepage": "https://github.com/Codex-/cosmiconfig-typescript-loader#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Codex-/cosmiconfig-typescript-loader.git"
+    "url": "git+https://github.com/Codex-/cosmiconfig-typescript-loader.git"
   },
   "bugs": {
     "url": "https://github.com/Codex-/cosmiconfig-typescript-loader/issues"
