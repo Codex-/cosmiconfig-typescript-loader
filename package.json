@@ -40,18 +40,18 @@
     "ts-node": "^10.4.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.3",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "eslint": "^8.4.1",
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "eslint": "^8.6.0",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.4.4",
+    "jest": "^27.4.5",
     "prettier": "^2.5.1",
     "release-it": "^14.11.8",
-    "ts-jest": "^27.1.1",
-    "typescript": "^4.5.3"
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4"
   },
   "keywords": [
     "cosmiconfig",
