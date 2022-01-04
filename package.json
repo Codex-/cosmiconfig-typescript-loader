@@ -1,6 +1,6 @@
 {
   "name": "cosmiconfig-typescript-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript loader for cosmiconfig",
   "author": "Alex Miller <codex.nz@gmail.com>",
   "license": "MIT",
