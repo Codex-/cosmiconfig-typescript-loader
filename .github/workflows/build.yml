@@ -47,8 +47,6 @@ jobs:
         with:
           node-version: lts/*
           cache: npm
-      - name: Use NPM 8
-        run: npm i -g npm@8
       - run: npm ci
       - name: test
         run: npm run test -- --coverage
