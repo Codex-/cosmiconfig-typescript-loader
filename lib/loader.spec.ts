@@ -9,12 +9,13 @@ describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");
 
   let loader: Loader;
+  let tsNodeSpy = jest.spyOn(tsnode, "register");
 
   function readFixtureContent(file: string): string {
     return fs.readFileSync(file).toString();
   }
 
-  beforeEach(() => {
+  beforeAll(() => {
     loader = TypeScriptLoader();
   });
 
@@ -26,6 +27,14 @@ describe("TypeScriptLoader", () => {
   it("should fail on parsing an invalid TS file", () => {
     const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
     expect(() => loader(filePath, readFixtureContent(filePath))).toThrowError();
+  });
+
+  it("should use the same instance of ts-node across multiple calls", () => {
+    const filePath = path.resolve(fixturesPath, "valid.fixture.ts");
+    loader(filePath, readFixtureContent(filePath));
+    loader(filePath, readFixtureContent(filePath));
+    loader(filePath, readFixtureContent(filePath));
+    expect(tsNodeSpy).toHaveBeenCalledTimes(1);
   });
 
   it("should throw a TypeScriptCompileError on error", () => {

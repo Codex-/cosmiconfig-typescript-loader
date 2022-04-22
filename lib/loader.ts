@@ -3,14 +3,14 @@ import { register, RegisterOptions } from "ts-node";
 import { TypeScriptCompileError } from "./typescript-compile-error";
 
 export function TypeScriptLoader(options?: RegisterOptions): Loader {
-  const tsNodeInstance = register({ ...options, compilerOptions: { module: "commonjs" } })
+  const tsNodeInstance = register({
+    ...options,
+    compilerOptions: { module: "commonjs" },
+  });
   return (path: string, content: string) => {
     try {
       // cosmiconfig requires the transpiled configuration to be CJS
-      tsNodeInstance.compile(
-        content,
-        path
-      );
+      tsNodeInstance.compile(content, path);
       const result = require(path);
 
       // `default` is used when exporting using export default, some modules
