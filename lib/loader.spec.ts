@@ -7,9 +7,9 @@ import { TypeScriptCompileError } from "./typescript-compile-error";
 
 describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");
+  const tsNodeSpy = jest.spyOn(tsnode, "register");
 
   let loader: Loader;
-  let tsNodeSpy = jest.spyOn(tsnode, "register");
 
   function readFixtureContent(file: string): string {
     return fs.readFileSync(file).toString();
@@ -31,7 +31,6 @@ describe("TypeScriptLoader", () => {
 
   it("should use the same instance of ts-node across multiple calls", () => {
     const filePath = path.resolve(fixturesPath, "valid.fixture.ts");
-    loader(filePath, readFixtureContent(filePath));
     loader(filePath, readFixtureContent(filePath));
     loader(filePath, readFixtureContent(filePath));
     expect(tsNodeSpy).toHaveBeenCalledTimes(1);
