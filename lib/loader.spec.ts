@@ -54,10 +54,16 @@ describe("TypeScriptLoader", () => {
     let stub: jest.SpyInstance<tsnode.Service, [service: tsnode.Service]>;
 
     beforeEach(() => {
-      stub = jest.spyOn(tsnode, "register").mockImplementation(() => {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
-        throw unknownError;
-      });
+      stub = jest.spyOn(tsnode, "register").mockImplementation(
+        () =>
+          ({
+            compile: (): string => {
+              // eslint-disable-next-line @typescript-eslint/no-throw-literal
+              throw unknownError;
+            },
+          } as any)
+      );
+      loader = TypeScriptLoader();
     });
 
     afterEach(() => {
