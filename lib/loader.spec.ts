@@ -7,6 +7,7 @@ import { TypeScriptCompileError } from "./typescript-compile-error";
 
 describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");
+  const tsNodeSpy = jest.spyOn(tsnode, "register");
 
   let loader: Loader;
 
@@ -14,7 +15,7 @@ describe("TypeScriptLoader", () => {
     return fs.readFileSync(file).toString();
   }
 
-  beforeEach(() => {
+  beforeAll(() => {
     loader = TypeScriptLoader();
   });
 
@@ -26,6 +27,13 @@ describe("TypeScriptLoader", () => {
   it("should fail on parsing an invalid TS file", () => {
     const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
     expect(() => loader(filePath, readFixtureContent(filePath))).toThrowError();
+  });
+
+  it("should use the same instance of ts-node across multiple calls", () => {
+    const filePath = path.resolve(fixturesPath, "valid.fixture.ts");
+    loader(filePath, readFixtureContent(filePath));
+    loader(filePath, readFixtureContent(filePath));
+    expect(tsNodeSpy).toHaveBeenCalledTimes(1);
   });
 
   it("should throw a TypeScriptCompileError on error", () => {
@@ -46,10 +54,16 @@ describe("TypeScriptLoader", () => {
     let stub: jest.SpyInstance<tsnode.Service, [service: tsnode.Service]>;
 
     beforeEach(() => {
-      stub = jest.spyOn(tsnode, "register").mockImplementation(() => {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
-        throw unknownError;
-      });
+      stub = jest.spyOn(tsnode, "register").mockImplementation(
+        () =>
+          ({
+            compile: (): string => {
+              // eslint-disable-next-line @typescript-eslint/no-throw-literal
+              throw unknownError;
+            },
+          } as any)
+      );
+      loader = TypeScriptLoader();
     });
 
     afterEach(() => {
