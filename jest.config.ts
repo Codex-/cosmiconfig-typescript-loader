@@ -6,7 +6,7 @@ const config: Config.InitialOptions = {
   ],
   globals: {
     "ts-jest": {
-      tsconfig: "tsconfig.test.json",
+      tsconfig: "tsconfig.json",
     },
   },
   moduleFileExtensions: ["ts", "js"],

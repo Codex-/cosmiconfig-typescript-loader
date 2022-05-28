@@ -2,8 +2,9 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
+    "noEmit": true,
     "pretty": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": true,
 
     "outDir": "dist",
@@ -15,5 +16,5 @@
     "strict": true
   },
   "include": ["lib"],
-  "exclude": ["**/__fixtures__/**/*", "**/*.spec.*"]
+  "exclude": ["**/__fixtures__/**/*"]
 }

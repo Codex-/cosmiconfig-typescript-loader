@@ -2,7 +2,7 @@
   "plugins": ["import", "prettier"],
   "extends": ["airbnb-typescript/base", "prettier"],
   "parserOptions": {
-    "project": "./tsconfig.test.json"
+    "project": "./tsconfig.json"
   },
   "ignorePatterns": [
     "lib/__fixtures__/**/*.ts",

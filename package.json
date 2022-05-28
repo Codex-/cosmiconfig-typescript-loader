@@ -18,7 +18,8 @@
     "url": "https://github.com/Codex-/cosmiconfig-typescript-loader/issues"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
+    "build:types": "tsc",
     "format:check": "prettier --check \"{**/*,*}.{js,ts}\"",
     "format:write": "npm run format:check -- --write",
     "lint": "eslint --ext \".js,.ts\" .",
