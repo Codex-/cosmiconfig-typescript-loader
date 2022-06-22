@@ -29,6 +29,8 @@ jobs:
           node-version: lts/*
           registry-url: https://registry.npmjs.org
       - run: npm ci
+      - name: types
+        run: npm run check:types
       - name: build
         run: npm run build
       - name: test
