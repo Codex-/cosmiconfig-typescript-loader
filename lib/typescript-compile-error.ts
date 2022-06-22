@@ -20,16 +20,4 @@ export class TypeScriptCompileError extends Error {
 
     return newError;
   }
-
-  /**
-   * Support legacy usage of this method.
-   * @deprecated
-   */
-  public toObject() {
-    return {
-      message: this.message,
-      name: this.name,
-      stack: this.stack,
-    };
-  }
 }

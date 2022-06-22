@@ -34,15 +34,4 @@ describe("TypeScriptCompileError", () => {
       expect(tscError).not.toContainEqual(testMsg);
     });
   });
-
-  describe("toObject", () => {
-    it("should support legacy usage of this method", () => {
-      const tscError = new TypeScriptCompileError("Test Error");
-      const errObj = tscError.toObject();
-
-      expect(errObj.message).toStrictEqual(tscError.message);
-      expect(errObj.name).toStrictEqual(tscError.name);
-      expect(errObj.stack).toStrictEqual(tscError.stack);
-    });
-  });
 });
