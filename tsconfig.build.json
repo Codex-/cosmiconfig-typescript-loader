@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "outDir": "dist/types",
     "noEmit": false,
-    "sourceMap": false
+    "sourceMap": false,
+    "emitDeclarationOnly": true
   },
   "exclude": ["**/__fixtures__/**/*", "**/*.spec.*"]
 }

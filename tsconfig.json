@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "module": "commonjs",
     "noEmit": true,
     "pretty": true,
     "sourceMap": true,
@@ -13,6 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": false,
+    "moduleResolution": "node",
     "strict": true
   },
   "include": ["lib"],

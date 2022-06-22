@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "dist/esm",
+    "declaration": false,
+    "emitDeclarationOnly": false
+  },
+  "exclude": ["**/__fixtures__/**/*", "**/*.spec.*"]
+}

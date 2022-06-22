@@ -4,11 +4,6 @@
   "description": "TypeScript loader for cosmiconfig",
   "author": "Alex Miller <codex.nz@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
   "homepage": "https://github.com/Codex-/cosmiconfig-typescript-loader#readme",
   "repository": {
     "type": "git",
@@ -17,9 +12,30 @@
   "bugs": {
     "url": "https://github.com/Codex-/cosmiconfig-typescript-loader/issues"
   },
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "build:types": "tsc",
+    "build": "npm run build:types && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:types": "tsc -p tsconfig.build.json",
+    "check:types": "tsc -p tsconfig.json",
     "format:check": "prettier --check \"{**/*,*}.{js,ts}\"",
     "format:write": "npm run format:check -- --write",
     "lint": "eslint --ext \".js,.ts\" .",
