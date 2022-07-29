@@ -6,6 +6,7 @@
   },
   "ignorePatterns": [
     "lib/__fixtures__/**/*.ts",
+    "esbuild.config.mjs",
     "jest.config.ts",
     "coverage",
     "dist"
