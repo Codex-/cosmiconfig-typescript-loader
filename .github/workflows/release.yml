@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0 # Need history for changelog generation
       - name: Use Node.js lts
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: lts/*
           registry-url: https://registry.npmjs.org
