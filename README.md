@@ -12,7 +12,7 @@ Simply add `TypeScriptLoader` to the list of loaders for the `.ts` file type:
 
 ```ts
 import { cosmiconfig } from "cosmiconfig";
-import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
+import ctl from "cosmiconfig-typescript-loader";
 
 const moduleName = "module";
 const explorer = cosmiconfig("test", {
@@ -30,7 +30,7 @@ const explorer = cosmiconfig("test", {
     `${moduleName}.config.cjs`,
   ],
   loaders: {
-    ".ts": TypeScriptLoader(),
+    ".ts": ctl.TypeScriptLoader(),
   },
 });
 
@@ -41,12 +41,12 @@ Or more simply if you only support loading of a TypeScript based configuration f
 
 ```ts
 import { cosmiconfig } from "cosmiconfig";
-import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
+import ctl from "cosmiconfig-typescript-loader";
 
 const moduleName = "module";
 const explorer = cosmiconfig("test", {
   loaders: {
-    ".ts": TypeScriptLoader(),
+    ".ts": ctl.TypeScriptLoader(),
   },
 });
 
