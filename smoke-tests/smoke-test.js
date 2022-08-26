@@ -2,18 +2,14 @@ const assert = require("node:assert");
 
 (async () => {
   try {
-    const esm = await import("../dist/cjs/index.js");
-    const cjs = require("../dist/cjs/index.js");
+    const { TypeScriptLoader: esm } = await import("../dist/cjs/index.js");
+    const { TypeScriptLoader: cjs } = require("../dist/cjs/index.js");
 
-    assert.strictEqual(
-      esm.TypeScriptLoader,
-      cjs.TypeScriptLoader,
-      "esm.TypeScriptLoader === cjs.TypeScriptLoader"
-    );
+    assert.strictEqual(esm, cjs, "esm === cjs");
 
-    // try to create loaders
-    esm.TypeScriptLoader();
-    cjs.TypeScriptLoader();
+    // Try to create loaders
+    esm();
+    cjs();
 
     console.info("Loaded with both CJS and ESM successfully");
   } catch (error) {
