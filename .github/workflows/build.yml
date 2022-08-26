@@ -31,11 +31,11 @@ jobs:
         if: ${{ always() }}
         run: npm run test
       - name: CJS import
-        run: node smoke-test-cjs.js
+        run: node smoke-tests/smoke-test-cjs.js
       - name: ESM import
-        run: node smoke-test-esm.mjs
+        run: node smoke-tests/smoke-test-esm.mjs
       - name: CJS and ESM import from CJS
-        run: node smoke-test.js
+        run: node smoke-tests/smoke-test.js
       - name: lint
         if: ${{ always() }}
         run: npm run lint

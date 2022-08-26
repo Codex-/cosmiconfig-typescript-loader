@@ -9,7 +9,8 @@
     "esbuild.config.mjs",
     "jest.config.ts",
     "coverage",
-    "dist"
+    "dist",
+    "smoke-tests"
   ],
   "rules": {
     "@typescript-eslint/await-thenable": "warn",
