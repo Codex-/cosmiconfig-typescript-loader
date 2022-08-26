@@ -1,14 +1,18 @@
-const assert = require('node:assert');
+const assert = require("node:assert");
 
 async function main() {
-   const TypeScriptLoader1 = await import('./dist/cjs/index.js');
-   const TypeScriptLoader2 = require('./dist/cjs/index.js');
+  const esm = await import("./dist/cjs/index.js");
+  const cjs = require("./dist/cjs/index.js");
 
-   assert.equal(TypeScriptLoader1.default, TypeScriptLoader2, 'TypeScriptLoader1 === TypeScriptLoader2');
+  assert.equal(
+    esm.TypeScriptLoader,
+    cjs.TypeScriptLoader,
+    "esm.TypeScriptLoader === cjs.TypeScriptLoader"
+  );
 
-   // try to create loaders
-   TypeScriptLoader1()
-   TypeScriptLoader2()
+  // try to create loaders
+  esm.TypeScriptLoader();
+  cjs.TypeScriptLoader();
 }
 
-main()
+main();

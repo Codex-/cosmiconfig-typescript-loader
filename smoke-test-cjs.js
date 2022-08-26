@@ -1,2 +1,3 @@
-const TypeScriptLoader = require("./dist/cjs/index.js");
-TypeScriptLoader()
+const mod = require("./dist/cjs/index.js");
+const { TypeScriptLoader } = mod;
+TypeScriptLoader();
