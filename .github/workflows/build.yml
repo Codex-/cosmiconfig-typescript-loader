@@ -30,6 +30,15 @@ jobs:
         id: test
         if: ${{ always() }}
         run: npm run test
+      - name: Import with CJS
+        if: ${{ always() }}
+        run: node smoke-tests/smoke-test-cjs.js
+      - name: Import with ESM
+        if: ${{ always() }}
+        run: node smoke-tests/smoke-test-esm.mjs
+      - name: Import with both CJS and ESM
+        if: ${{ always() }}
+        run: node smoke-tests/smoke-test.js
       - name: lint
         if: ${{ always() }}
         run: npm run lint
