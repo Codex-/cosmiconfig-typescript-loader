@@ -43,7 +43,7 @@
     "@types/jest": "^28.1.8",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "chalk": "^5.0.1",
-    "esbuild": "^0.15.5",
+    "esbuild": "0.15.6",
     "eslint": "^8.22.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
