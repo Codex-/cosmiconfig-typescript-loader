@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { TypeScriptCompileError } from "./typescript-compile-error";
 
 describe("TypeScriptCompileError", () => {

@@ -1,5 +1,6 @@
-import path from "path";
+import path from "node:path";
 import { cosmiconfig, cosmiconfigSync } from "cosmiconfig";
+import { describe, expect, it } from "vitest";
 import { TypeScriptLoader } from ".";
 
 describe("TypeScriptLoader", () => {
@@ -36,7 +37,7 @@ describe("TypeScriptLoader", () => {
 
       try {
         await cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts"));
-        fail("Should fail to load invalid TS");
+        throw new Error("Should fail to load invalid TS");
       } catch (error: any) {
         expect(error?.name).toStrictEqual("TypeScriptCompileError");
       }

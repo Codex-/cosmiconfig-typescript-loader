@@ -1,13 +1,40 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { Loader } from "cosmiconfig";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  SpyInstance,
+  vi,
+} from "vitest";
+
+vi.mock("ts-node", async () => {
+  const tsnode = await vi.importActual<typeof import("ts-node")>("ts-node");
+
+  let writableTsNode: any = {};
+  Object.keys(tsnode).forEach((key) =>
+    Object.defineProperty(writableTsNode, key, {
+      value: (tsnode as any)[key],
+      writable: true,
+    })
+  );
+
+  return writableTsNode;
+});
+
 import * as tsnode from "ts-node";
+
 import { TypeScriptLoader } from "./loader";
 import { TypeScriptCompileError } from "./typescript-compile-error";
 
 describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");
-  const tsNodeSpy = jest.spyOn(tsnode, "register");
+  const tsNodeSpy = vi.spyOn(tsnode, "register");
 
   let loader: Loader;
 
@@ -17,6 +44,10 @@ describe("TypeScriptLoader", () => {
 
   beforeAll(() => {
     loader = TypeScriptLoader();
+  });
+
+  afterAll(() => {
+    vi.restoreAllMocks();
   });
 
   it("should parse a valid TS file", () => {
@@ -40,7 +71,7 @@ describe("TypeScriptLoader", () => {
     try {
       const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
       loader(filePath, readFixtureContent(filePath));
-      fail(
+      throw new Error(
         "Error should be thrown upon failing to transpile an invalid TS file."
       );
     } catch (error: unknown) {
@@ -51,10 +82,10 @@ describe("TypeScriptLoader", () => {
   describe("ts-node", () => {
     const unknownError = "Test Error";
 
-    let stub: jest.SpyInstance<tsnode.Service, [service: tsnode.Service]>;
+    let stub: SpyInstance<[service: tsnode.Service], tsnode.Service>;
 
     beforeEach(() => {
-      stub = jest.spyOn(tsnode, "register").mockImplementation(
+      stub = vi.spyOn(tsnode, "register").mockImplementation(
         () =>
           ({
             compile: (): string => {
@@ -73,7 +104,7 @@ describe("TypeScriptLoader", () => {
     it("rethrows an error if it is not an instance of Error", () => {
       try {
         loader("filePath", "readFixtureContent(filePath)");
-        fail(
+        throw new Error(
           "Error should be thrown upon failing to transpile an invalid TS file."
         );
       } catch (error: unknown) {
