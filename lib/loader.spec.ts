@@ -12,25 +12,26 @@ import {
   SpyInstance,
   vi,
 } from "vitest";
+import * as tsnode from "ts-node";
+
+import { TypeScriptLoader } from "./loader";
+import { TypeScriptCompileError } from "./typescript-compile-error";
 
 vi.mock("ts-node", async () => {
-  const tsnode = await vi.importActual<typeof import("ts-node")>("ts-node");
+  const actualTsnode = await vi.importActual<typeof import("ts-node")>(
+    "ts-node"
+  );
 
-  let writableTsNode: any = {};
-  Object.keys(tsnode).forEach((key) =>
+  const writableTsNode: any = {};
+  Object.keys(actualTsnode).forEach((key) =>
     Object.defineProperty(writableTsNode, key, {
-      value: (tsnode as any)[key],
+      value: (actualTsnode as any)[key],
       writable: true,
     })
   );
 
   return writableTsNode;
 });
-
-import * as tsnode from "ts-node";
-
-import { TypeScriptLoader } from "./loader";
-import { TypeScriptCompileError } from "./typescript-compile-error";
 
 describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");
