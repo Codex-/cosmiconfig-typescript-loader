@@ -31,7 +31,7 @@
     "test:coverage": "vitest --coverage"
   },
   "engines": {
-    "node": ">=12",
+    "node": ">=v18.13.0",
     "npm": ">=6"
   },
   "peerDependencies": {
