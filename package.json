@@ -32,7 +32,7 @@
   },
   "engines": {
     "node": ">=12",
-    "npm": ">=6"
+    "npm": ">=9.4.0"
   },
   "peerDependencies": {
     "@types/node": "*",
