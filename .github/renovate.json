@@ -16,8 +16,7 @@
     },
     {
       "depTypeList": ["peerDependencies"],
-      "matchUpdateTypes": ["major"],
-      "automerge": false
+      "enabled": false
     },
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
