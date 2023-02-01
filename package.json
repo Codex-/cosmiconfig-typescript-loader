@@ -27,7 +27,8 @@
     "lint": "eslint --ext \".js,.ts\" .",
     "lint:fix": "npm run lint -- --fix",
     "release": "release-it",
-    "test": "vitest run --coverage"
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "engines": {
     "node": ">=12",
