@@ -1,5 +1,7 @@
-import path from "path";
+import path from "node:path";
+
 import { cosmiconfig, cosmiconfigSync } from "cosmiconfig";
+
 import { TypeScriptLoader } from ".";
 
 describe("TypeScriptLoader", () => {

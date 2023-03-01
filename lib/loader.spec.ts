@@ -1,7 +1,9 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
+
 import { Loader } from "cosmiconfig";
 import * as tsnode from "ts-node";
+
 import { TypeScriptLoader } from "./loader";
 import { TypeScriptCompileError } from "./typescript-compile-error";
 
