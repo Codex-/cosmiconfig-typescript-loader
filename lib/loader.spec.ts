@@ -83,5 +83,40 @@ describe("TypeScriptLoader", () => {
         expect(error).toStrictEqual(unknownError);
       }
     });
+
+    describe("lazy loading", () => {
+      let tsNodeRequired = false;
+
+      beforeEach(() => {
+        tsNodeRequired = false;
+        jest.mock("ts-node", () => {
+          tsNodeRequired = true;
+          return {};
+        });
+      });
+
+      afterEach(() => {
+        jest.restoreAllMocks();
+      });
+
+      it("should not require ts-node without being called", () => {
+        TypeScriptLoader();
+
+        expect(tsNodeRequired).toEqual(false);
+      });
+
+      it("should require ts-node when being called", () => {
+        const tsLoader = TypeScriptLoader();
+
+        try {
+          tsLoader("", "");
+        } catch {
+          // We're concerned with the loading of ts-node
+          // execution errors can be disregarded
+        }
+
+        expect(tsNodeRequired).toEqual(true);
+      });
+    });
   });
 });

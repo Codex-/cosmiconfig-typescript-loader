@@ -1,15 +1,21 @@
 import type { Loader } from "cosmiconfig";
-import { register, RegisterOptions } from "ts-node";
+import type { RegisterOptions, Service } from "ts-node";
 
 import { TypeScriptCompileError } from "./typescript-compile-error";
 
 export function TypeScriptLoader(options?: RegisterOptions): Loader {
-  const tsNodeInstance = register({
-    ...options,
-    compilerOptions: { module: "commonjs" },
-  });
+  let tsNodeInstance: Service;
+
   return (path: string, content: string) => {
     try {
+      if (!tsNodeInstance) {
+        const { register } = require("ts-node") as typeof import("ts-node");
+        tsNodeInstance = register({
+          ...options,
+          compilerOptions: { module: "commonjs" },
+        });
+      }
+
       // cosmiconfig requires the transpiled configuration to be CJS
       tsNodeInstance.compile(content, path);
       const result = require(path);
