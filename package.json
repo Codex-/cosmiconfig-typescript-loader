@@ -27,7 +27,8 @@
     "lint": "eslint --ext \".js,.ts\" .",
     "lint:fix": "npm run lint -- --fix",
     "release": "release-it",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "engines": {
     "node": ">=v14.21.3"
