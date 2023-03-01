@@ -1,5 +1,6 @@
 import type { Loader } from "cosmiconfig";
 import { register, RegisterOptions } from "ts-node";
+
 import { TypeScriptCompileError } from "./typescript-compile-error";
 
 export function TypeScriptLoader(options?: RegisterOptions): Loader {

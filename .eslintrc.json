@@ -7,7 +7,7 @@
   "ignorePatterns": [
     "lib/__fixtures__/**/*.ts",
     "esbuild.config.mjs",
-    "vite.config.ts",
+    "jest.config.ts",
     "coverage",
     "dist",
     "smoke-tests"
