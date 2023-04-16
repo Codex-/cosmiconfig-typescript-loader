@@ -86,12 +86,17 @@ describe("TypeScriptLoader", () => {
 
     describe("lazy loading", () => {
       let tsNodeRequired = false;
+      let tsNodeRegisterMock: jest.Mock;
 
       beforeEach(() => {
         tsNodeRequired = false;
+        tsNodeRegisterMock = jest.fn();
+
         jest.mock("ts-node", () => {
           tsNodeRequired = true;
-          return {};
+          return {
+            register: tsNodeRegisterMock,
+          };
         });
       });
 
@@ -103,6 +108,7 @@ describe("TypeScriptLoader", () => {
         TypeScriptLoader();
 
         expect(tsNodeRequired).toEqual(false);
+        expect(tsNodeRegisterMock).not.toBeCalled();
       });
 
       it("should require ts-node when being called", () => {
@@ -116,6 +122,7 @@ describe("TypeScriptLoader", () => {
         }
 
         expect(tsNodeRequired).toEqual(true);
+        expect(tsNodeRegisterMock).toBeCalled();
       });
     });
   });
