@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 const nodeTargets = ["node14", "node16", "node18"];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const packageJsonPath = path.resolve(__dirname, "package.json");
+const packageJsonPath = path.resolve(__dirname, "..", "package.json");
 
 async function getExternals() {
   const packageJson = JSON.parse(await readFile(packageJsonPath));

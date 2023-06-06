@@ -19,7 +19,7 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "npm run build:types && npm run build:bundles",
-    "build:bundles": "node ./esbuild.config.mjs",
+    "build:bundles": "node ./scripts/esbuild.config.mjs",
     "build:types": "tsc -p tsconfig.build.json",
     "check:types": "tsc -p tsconfig.json",
     "format:check": "prettier --check \"{**/*,*}.{js,ts}\"",
