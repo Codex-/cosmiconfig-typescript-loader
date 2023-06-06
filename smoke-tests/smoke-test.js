@@ -2,8 +2,8 @@ const assert = require("node:assert");
 
 (async () => {
   try {
-    const { TypeScriptLoader: esm } = await import("../dist/cjs/index.js");
-    const { TypeScriptLoader: cjs } = require("../dist/cjs/index.js");
+    const { TypeScriptLoader: esm } = await import("../dist/esm/index.mjs");
+    const { TypeScriptLoader: cjs } = require("../dist/cjs/index.cjs");
 
     assert.strictEqual(esm, cjs, "esm === cjs");
 

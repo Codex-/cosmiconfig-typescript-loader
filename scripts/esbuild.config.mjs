@@ -1,18 +1,73 @@
+// @ts-check
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import chalk from "chalk";
 import { analyzeMetafile, build } from "esbuild";
-import { readFile } from "fs/promises";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const nodeTargets = ["node14", "node16", "node18"];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const packageJsonPath = path.resolve(__dirname, "..", "package.json");
 
-async function getExternals() {
-  const packageJson = JSON.parse(await readFile(packageJsonPath));
+/**
+ * Available formats: https://esbuild.github.io/api/#format
+ *
+ * @type {Array<"cjs" | "esm">}
+ */
+const FORMATS = ["cjs", "esm"];
+/**
+ * @type {import('esbuild').BuildOptions['target']}
+ */
+const TARGETS = ["node14", "node16", "node18", "node20", "esnext"];
 
-  return Object.keys(packageJson.peerDependencies);
+const ROOT = path.resolve(__dirname, "..");
+const SOURCES_ROOT = path.resolve(ROOT, "./lib");
+
+/**
+ * @param {"cjs" | "esm"} format
+ * @return {import('esbuild').Plugin}
+ */
+function addExtension(format) {
+  const newExtension = format === "cjs" ? ".cjs" : ".mjs";
+  return {
+    name: "add-extension",
+    setup(build) {
+      build.onResolve({ filter: /.*/ }, (args) => {
+        if (args.importer)
+          return {
+            path: args.path.replace(/\.js$/, newExtension),
+            external: true,
+          };
+      });
+    },
+  };
+}
+
+/**
+ * @param {string[]} entryPoints
+ * @param {"cjs" | "esm"} format
+ */
+async function buildSources(entryPoints, format) {
+  return build({
+    entryPoints: entryPoints,
+    outdir: `${ROOT}/dist/${format}`,
+    target: TARGETS,
+    platform: "node",
+    format: format,
+    metafile: true,
+
+    // These allow us to build compliant exports and imports based on modern node
+    bundle: true,
+    outExtension: { ".js": format === "cjs" ? ".cjs" : ".mjs" },
+    plugins: [addExtension(format)],
+  });
+}
+
+async function getSourceEntryPoints() {
+  const entryPoints = await fs.readdir(SOURCES_ROOT);
+
+  return entryPoints
+    .filter((file) => !/__fixtures__|\.spec\./.test(file))
+    .map((file) => path.resolve(SOURCES_ROOT, file));
 }
 
 (async () => {
@@ -24,27 +79,34 @@ async function getExternals() {
       )
     );
 
-    const externalDeps = await getExternals();
+    console.info("- Generate sources");
 
-    const result = await build({
-      entryPoints: ["./lib/index.ts"],
-      outfile: "dist/cjs/index.js",
-      metafile: true,
-      bundle: true,
-      format: "cjs",
-      external: externalDeps,
-      platform: "node",
-      target: nodeTargets,
-      treeShaking: true,
-    });
+    const sourceEntryPoints = await getSourceEntryPoints();
 
-    const analysis = await analyzeMetafile(result.metafile);
-    console.info(`📝 Bundle Analysis:${analysis}`);
+    for (const format of FORMATS) {
+      console.info(`- Generating ${chalk.bold.greenBright(format)} sources`);
+
+      const result = await buildSources(sourceEntryPoints, format);
+      const analysis = await analyzeMetafile(result.metafile);
+      console.info(
+        `${analysis
+          .trim()
+          .split(/\n\r/)
+          .map((line) => `  ${line}`)
+          .join()}`
+      );
+
+      console.info(
+        `${chalk.bold.greenBright("✔")} Generating ${chalk.bold.greenBright(
+          format
+        )} sources completed!\n`
+      );
+    }
 
     console.info(
-      `${chalk.bold.green("✔ Bundled successfully!")} (${
-        Date.now() - startTime
-      }ms)`
+      chalk.bold.green(
+        `✔ Generate sources completed! (${Date.now() - startTime}ms)`
+      )
     );
   } catch (error) {
     console.error(`🧨 ${chalk.red.bold("Failed:")} ${error.message}`);
