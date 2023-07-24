@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { cosmiconfig, cosmiconfigSync } from "cosmiconfig";
+import { cosmiconfig } from "cosmiconfig";
 
 import { TypeScriptLoader } from ".";
 
@@ -46,13 +46,13 @@ describe("TypeScriptLoader", () => {
   });
 
   describe("cosmiconfigSync", () => {
-    it("should load a valid TS file", () => {
-      const cfg = cosmiconfigSync("test", {
+    it("should load a valid TS file", async () => {
+      const cfg = cosmiconfig("test", {
         loaders: {
           ".ts": TypeScriptLoader(),
         },
       });
-      const loadedCfg = cfg.load(
+      const loadedCfg = await cfg.load(
         path.resolve(fixturesPath, "valid.fixture.ts")
       );
 
@@ -61,16 +61,16 @@ describe("TypeScriptLoader", () => {
       expect(loadedCfg!.config.test.cake).toStrictEqual("a lie");
     });
 
-    it("should throw an error on loading an invalid TS file", () => {
-      const cfg = cosmiconfigSync("test", {
+    it("should throw an error on loading an invalid TS file", async () => {
+      const cfg = cosmiconfig("test", {
         loaders: {
           ".ts": TypeScriptLoader(),
         },
       });
 
-      expect(() =>
+      await expect(() =>
         cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts"))
-      ).toThrowError();
+      ).rejects.toThrowError();
     });
   });
 });
