@@ -12,12 +12,7 @@ export function TypeScriptLoader(options?: RegisterOptions): Loader {
     try {
       // cosmiconfig requires the transpiled configuration to be CJS
       tsNodeInstance.compile(content, path);
-      let result;
-      if (typeof require !== "undefined") {
-        result = require(path);
-      } else {
-        result = await import(path);
-      }
+      const result = await import(path);
 
       // `default` is used when exporting using export default, some modules
       // may still use `module.exports` or if in TS `export = `
