@@ -26,9 +26,11 @@ describe("TypeScriptLoader", () => {
     loader(filePath, readFixtureContent(filePath));
   });
 
-  it("should fail on parsing an invalid TS file", () => {
+  it("should fail on parsing an invalid TS file", async () => {
     const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
-    expect(() => loader(filePath, readFixtureContent(filePath))).toThrowError();
+    await expect(() =>
+      loader(filePath, readFixtureContent(filePath))
+    ).rejects.toThrowError();
   });
 
   it("should use the same instance of ts-node across multiple calls", () => {
@@ -38,10 +40,10 @@ describe("TypeScriptLoader", () => {
     expect(tsNodeSpy).toHaveBeenCalledTimes(1);
   });
 
-  it("should throw a TypeScriptCompileError on error", () => {
+  it("should throw a TypeScriptCompileError on error", async () => {
     try {
       const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
-      loader(filePath, readFixtureContent(filePath));
+      await loader(filePath, readFixtureContent(filePath));
       fail(
         "Error should be thrown upon failing to transpile an invalid TS file."
       );
@@ -72,9 +74,9 @@ describe("TypeScriptLoader", () => {
       stub.mockRestore();
     });
 
-    it("rethrows an error if it is not an instance of Error", () => {
+    it("rethrows an error if it is not an instance of Error", async () => {
       try {
-        loader("filePath", "readFixtureContent(filePath)");
+        await loader("filePath", "readFixtureContent(filePath)");
         fail(
           "Error should be thrown upon failing to transpile an invalid TS file."
         );
