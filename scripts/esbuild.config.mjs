@@ -47,19 +47,25 @@ function addExtension(format) {
  * @param {"cjs" | "esm"} format
  */
 async function buildSources(entryPoints, format) {
-  return build({
+  /** @type {import('esbuild').BuildOptions} */
+  const options = {
     entryPoints: entryPoints,
     outdir: `${ROOT}/dist/${format}`,
     target: TARGETS,
     platform: "node",
     format: format,
     metafile: true,
+    supported: {
+      // Performs transform of `import` to `require`
+      "dynamic-import": format !== "cjs",
+    },
 
     // These allow us to build compliant exports and imports based on modern node
     bundle: true,
     outExtension: { ".js": format === "cjs" ? ".cjs" : ".mjs" },
     plugins: [addExtension(format)],
-  });
+  };
+  return build(options);
 }
 
 async function getSourceEntryPoints() {
@@ -87,7 +93,10 @@ async function getSourceEntryPoints() {
       console.info(`- Generating ${chalk.bold.greenBright(format)} sources`);
 
       const result = await buildSources(sourceEntryPoints, format);
-      const analysis = await analyzeMetafile(result.metafile);
+      const analysis = await analyzeMetafile(
+        // @ts-ignore we know that the metafile will be emitted
+        result.metafile
+      );
       console.info(
         `${analysis
           .trim()
