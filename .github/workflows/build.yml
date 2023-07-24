@@ -31,7 +31,7 @@ jobs:
         run: npm run test
       - name: Import with CJS
         if: ${{ always() }}
-        run: node smoke-tests/smoke-test-cjs.js
+        run: node smoke-tests/smoke-test-cjs.cjs
       - name: Import with ESM
         if: ${{ always() }}
         run: node smoke-tests/smoke-test-esm.mjs
