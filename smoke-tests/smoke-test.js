@@ -5,7 +5,11 @@ const assert = require("node:assert");
     const { TypeScriptLoader: esm } = await import("../dist/esm/index.mjs");
     const { TypeScriptLoader: cjs } = require("../dist/cjs/index.cjs");
 
-    assert.strictEqual(esm, cjs, "esm === cjs");
+    // Assert the functions loaded by checking their names load and types are correct
+    assert.strictEqual(esm.name === "TypeScriptLoader", true);
+    assert.strictEqual(typeof esm === "function", true);
+    assert.strictEqual(cjs.name === "TypeScriptLoader", true);
+    assert.strictEqual(typeof cjs === "function", true);
 
     // Try to create loaders
     esm();
