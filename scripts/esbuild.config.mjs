@@ -55,10 +55,6 @@ async function buildSources(entryPoints, format) {
     platform: "node",
     format: format,
     metafile: true,
-    supported: {
-      // Performs transform of `import` to `require`
-      "dynamic-import": format !== "cjs",
-    },
 
     // These allow us to build compliant exports and imports based on modern node
     bundle: true,
