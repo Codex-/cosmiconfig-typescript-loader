@@ -2,14 +2,23 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { Loader } from "cosmiconfig";
-import * as tsnode from "ts-node";
+import * as jiti from "jiti";
 
 import { TypeScriptLoader } from "./loader";
 import { TypeScriptCompileError } from "./typescript-compile-error";
 
+// Handle jiti using `export default`
+jest.mock("jiti", () => {
+  const actual = jest.requireActual("jiti");
+  return {
+    __esModule: true,
+    default: jest.fn(actual),
+  };
+});
+
 describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");
-  const tsNodeSpy = jest.spyOn(tsnode, "register");
+  const jitiSpy = jest.spyOn(jiti, "default");
 
   let loader: Loader;
 
@@ -31,11 +40,11 @@ describe("TypeScriptLoader", () => {
     expect(() => loader(filePath, readFixtureContent(filePath))).toThrowError();
   });
 
-  it("should use the same instance of ts-node across multiple calls", () => {
+  it("should use the same instance of jiti across multiple calls", () => {
     const filePath = path.resolve(fixturesPath, "valid.fixture.ts");
     loader(filePath, readFixtureContent(filePath));
     loader(filePath, readFixtureContent(filePath));
-    expect(tsNodeSpy).toHaveBeenCalledTimes(1);
+    expect(jitiSpy).toHaveBeenCalledTimes(1);
   });
 
   it("should throw a TypeScriptCompileError on error", () => {
@@ -50,21 +59,17 @@ describe("TypeScriptLoader", () => {
     }
   });
 
-  describe("ts-node", () => {
+  describe("jiti", () => {
     const unknownError = "Test Error";
 
-    let stub: jest.SpyInstance<tsnode.Service, [service: tsnode.Service]>;
+    let stub: jest.SpyInstance;
 
     beforeEach(() => {
-      stub = jest.spyOn(tsnode, "register").mockImplementation(
-        () =>
-          ({
-            compile: (): string => {
-              // eslint-disable-next-line @typescript-eslint/no-throw-literal
-              throw unknownError;
-            },
-          } as any)
-      );
+      stub = jest.spyOn(jiti, "default").mockImplementation((() => () => {
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        throw unknownError;
+      }) as any);
+
       loader = TypeScriptLoader();
     });
 

@@ -1,7 +1,7 @@
-import assert from "node:assert";
+const assert = require("node:assert");
 
-import { cosmiconfig } from "cosmiconfig";
-import { TypeScriptLoader } from "../dist/esm/index.mjs";
+const { cosmiconfig } = require("cosmiconfig");
+const { TypeScriptLoader } = require("../dist/cjs/index.cjs");
 TypeScriptLoader();
 
 (async () => {
@@ -18,11 +18,11 @@ TypeScriptLoader();
       cake: "lie",
     });
 
-    console.info("Loaded with ESM successfully");
+    console.info("Loaded with CJS successfully");
   } catch (error) {
     console.error(error);
     console.debug(error.stack);
-    console.error("Failed to load with ESM");
+    console.error("Failed to load with CJS");
     process.exit(1);
   }
 })();

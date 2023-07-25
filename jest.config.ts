@@ -6,6 +6,9 @@ const config: Config.InitialOptions = {
     "!<rootDir>/lib/__fixtures__/**/*",
   ],
   moduleFileExtensions: ["ts", "js"],
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+  },
   transform: {
     "^.+\\.ts$": "@swc/jest",
   },

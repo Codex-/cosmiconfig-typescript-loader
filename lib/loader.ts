@@ -1,18 +1,13 @@
 import type { Loader } from "cosmiconfig";
-import { register, RegisterOptions } from "ts-node";
+import jiti, { type JITIOptions } from "jiti";
 
-import { TypeScriptCompileError } from "./typescript-compile-error";
+import { TypeScriptCompileError } from "./typescript-compile-error.js";
 
-export function TypeScriptLoader(options?: RegisterOptions): Loader {
-  const tsNodeInstance = register({
-    ...options,
-    compilerOptions: { module: "commonjs" },
-  });
-  return (path: string, content: string) => {
+export function TypeScriptLoader(options?: JITIOptions): Loader {
+  const loader = jiti("", { interopDefault: true, ...options });
+  return (path: string) => {
     try {
-      // cosmiconfig requires the transpiled configuration to be CJS
-      tsNodeInstance.compile(content, path);
-      const result = require(path);
+      const result = loader(path);
 
       // `default` is used when exporting using export default, some modules
       // may still use `module.exports` or if in TS `export = `

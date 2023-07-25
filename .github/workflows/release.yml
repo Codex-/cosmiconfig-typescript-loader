@@ -17,7 +17,6 @@ jobs:
     env:
       CI: true
       GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
-      NPM_OTP_TOKEN: ${{ github.event.inputs.otp }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     runs-on: ubuntu-latest
     steps:

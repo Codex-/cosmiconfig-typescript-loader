@@ -17,21 +17,14 @@ describe("TypeScriptCompileError", () => {
       expect(tscError.stack).toBe(testError.stack);
     });
 
-    it("should replace the legacy tsc error string", () => {
-      const testMsg =
-        "TypeScript compiler encountered syntax errors while transpiling. Errors: ";
+    it("should prefix the jiti parser error", () => {
+      const testMsg = 'ParseError: Unexpected token, expected ","';
       const legacyError = new Error(testMsg);
       const tscError = TypeScriptCompileError.fromError(legacyError);
 
-      expect(tscError).not.toContainEqual(testMsg);
-    });
-
-    it("should replace the tsc error string", () => {
-      const testMsg = "⨯ Unable to compile TypeScript:";
-      const newError = new Error(testMsg);
-      const tscError = TypeScriptCompileError.fromError(newError);
-
-      expect(tscError).not.toContainEqual(testMsg);
+      expect(tscError.message).toContain(
+        "TypeScriptLoader failed to compile TypeScript:"
+      );
     });
   });
 });
