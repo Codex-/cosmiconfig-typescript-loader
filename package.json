@@ -31,8 +31,8 @@
     }
   },
   "scripts": {
-    "build": "npm run build:types && npm run build:bundles",
-    "build:bundles": "node ./scripts/esbuild.config.mjs",
+    "build": "npm run build:types && npm run build:sources",
+    "build:sources": "node ./scripts/esbuild.config.mjs",
     "build:types": "tsc -p tsconfig.build.json",
     "check:types": "tsc -p tsconfig.json",
     "format:check": "prettier --check \"{**/*,*}.{js,cjs,mjs,ts}\"",
