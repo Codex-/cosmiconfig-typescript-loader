@@ -52,7 +52,7 @@ describe("TypeScriptLoader", () => {
       const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
       loader(filePath, readFixtureContent(filePath));
       fail(
-        "Error should be thrown upon failing to transpile an invalid TS file."
+        "Error should be thrown upon failing to transpile an invalid TS file.",
       );
     } catch (error: unknown) {
       expect(error).toBeInstanceOf(TypeScriptCompileError);
@@ -81,7 +81,7 @@ describe("TypeScriptLoader", () => {
       try {
         loader("filePath", "readFixtureContent(filePath)");
         fail(
-          "Error should be thrown upon failing to transpile an invalid TS file."
+          "Error should be thrown upon failing to transpile an invalid TS file.",
         );
       } catch (error: unknown) {
         expect(error).not.toBeInstanceOf(TypeScriptCompileError);

@@ -22,7 +22,7 @@ describe("TypeScriptLoader", () => {
           },
         });
         const loadedCfg = cfg.load(
-          path.resolve(fixturesPath, "valid.fixture.ts")
+          path.resolve(fixturesPath, "valid.fixture.ts"),
         );
 
         expect(typeof loadedCfg!.config).toStrictEqual("object");
@@ -54,7 +54,7 @@ describe("TypeScriptLoader", () => {
           },
         });
         const loadedCfg = await cfg.load(
-          path.resolve(fixturesPath, "valid.fixture.ts")
+          path.resolve(fixturesPath, "valid.fixture.ts"),
         );
 
         expect(typeof loadedCfg!.config).toStrictEqual("object");
@@ -87,7 +87,7 @@ describe("TypeScriptLoader", () => {
         },
       });
       const loadedCfg = cfg.load(
-        path.resolve(fixturesPath, "valid.fixture.ts")
+        path.resolve(fixturesPath, "valid.fixture.ts"),
       );
 
       expect(typeof loadedCfg!.config).toStrictEqual("object");
@@ -103,7 +103,7 @@ describe("TypeScriptLoader", () => {
       });
 
       expect(() =>
-        cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts"))
+        cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts")),
       ).toThrowError();
     });
   });
