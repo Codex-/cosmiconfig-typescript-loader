@@ -11,6 +11,10 @@
   },
   "packageRules": [
     {
+      "matchDepTypes": ["engines"],
+      "enabled": false
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "automerge": true
     },
