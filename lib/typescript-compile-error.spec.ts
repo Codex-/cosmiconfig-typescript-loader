@@ -8,10 +8,10 @@ describe("TypeScriptCompileError", () => {
       const tscError = TypeScriptCompileError.fromError(testError);
 
       expect(tscError.name).toStrictEqual(
-        TypeScriptCompileError.prototype.constructor.name
+        TypeScriptCompileError.prototype.constructor.name,
       );
       expect(tscError.message).toContain(
-        "TypeScriptLoader failed to compile TypeScript"
+        "TypeScriptLoader failed to compile TypeScript",
       );
       expect(tscError.message).toContain("Test Error");
       expect(tscError.stack).toBe(testError.stack);
@@ -23,7 +23,7 @@ describe("TypeScriptCompileError", () => {
       const tscError = TypeScriptCompileError.fromError(legacyError);
 
       expect(tscError.message).toContain(
-        "TypeScriptLoader failed to compile TypeScript:"
+        "TypeScriptLoader failed to compile TypeScript:",
       );
     });
   });

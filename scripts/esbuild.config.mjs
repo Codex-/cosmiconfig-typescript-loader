@@ -77,8 +77,8 @@ async function getSourceEntryPoints() {
     const startTime = Date.now();
     console.info(
       chalk.bold(
-        `🚀 ${chalk.blueBright("cosmiconfig-typescript-loader")} Build\n`
-      )
+        `🚀 ${chalk.blueBright("cosmiconfig-typescript-loader")} Build\n`,
+      ),
     );
 
     console.info("- Generate sources");
@@ -91,27 +91,27 @@ async function getSourceEntryPoints() {
       const result = await buildSources(sourceEntryPoints, format);
       const analysis = await analyzeMetafile(
         // @ts-ignore we know that the metafile will be emitted
-        result.metafile
+        result.metafile,
       );
       console.info(
         `${analysis
           .trim()
           .split(/\n\r/)
           .map((line) => `  ${line}`)
-          .join()}`
+          .join()}`,
       );
 
       console.info(
         `${chalk.bold.greenBright("✔")} Generating ${chalk.bold.greenBright(
-          format
-        )} sources completed!\n`
+          format,
+        )} sources completed!\n`,
       );
     }
 
     console.info(
       chalk.bold.green(
-        `✔ Generate sources completed! (${Date.now() - startTime}ms)`
-      )
+        `✔ Generate sources completed! (${Date.now() - startTime}ms)`,
+      ),
     );
   } catch (error) {
     console.error(`🧨 ${chalk.red.bold("Failed:")} ${error.message}`);
