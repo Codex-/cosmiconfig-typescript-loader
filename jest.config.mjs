@@ -1,6 +1,9 @@
-import type { Config } from "@jest/types";
+// @ts-check
 
-const config: Config.InitialOptions = {
+/**
+ * @type { import("jest").Config }
+ */
+const config = {
   collectCoverageFrom: [
     "<rootDir>/lib/**/*",
     "!<rootDir>/lib/__fixtures__/**/*",
