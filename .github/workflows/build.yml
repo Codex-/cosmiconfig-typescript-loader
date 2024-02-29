@@ -65,4 +65,4 @@ jobs:
       - name: test
         run: npm run test:coverage
       - name: codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
