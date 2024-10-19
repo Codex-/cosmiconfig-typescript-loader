@@ -8,12 +8,10 @@ import { TypeScriptCompileError } from "./typescript-compile-error.js";
 type LoaderAsync = (filepath: string, content: string) => Promise<LoaderResult>;
 
 export function TypeScriptLoader(options?: JitiOptions): LoaderAsync {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment
   const loader: Jiti = createJiti("", { interopDefault: true, ...options });
-  return async (path: string): Promise<unknown> => {
+  return async (path: string, _content: string): Promise<LoaderResult> => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-      const result: { default?: unknown } = (await loader.import(path)) as any;
+      const result = (await loader.import(path)) as { default?: unknown };
 
       // `default` is used when exporting using export default, some modules
       // may still use `module.exports` or if in TS `export = `
@@ -32,12 +30,11 @@ export function TypeScriptLoader(options?: JitiOptions): LoaderAsync {
  * @deprecated use `TypeScriptLoader`
  */
 export function TypeScriptLoaderSync(options?: JitiOptions): LoaderSync {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment
   const loader: Jiti = createJiti("", { interopDefault: true, ...options });
-  return (path: string): unknown => {
+  return (path: string, _content: string): LoaderResult => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-deprecated
-      const result: { default?: unknown } = loader(path);
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
+      const result = loader(path) as { default?: unknown };
 
       // `default` is used when exporting using export default, some modules
       // may still use `module.exports` or if in TS `export = `
