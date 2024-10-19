@@ -40,6 +40,7 @@ describe("TypeScriptLoader", () => {
         try {
           cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts"));
           fail("Should fail to load invalid TS");
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           expect(error?.name).toStrictEqual("TypeScriptCompileError");
         }
@@ -72,6 +73,7 @@ describe("TypeScriptLoader", () => {
         try {
           await cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts"));
           fail("Should fail to load invalid TS");
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           expect(error?.name).toStrictEqual("TypeScriptCompileError");
         }
@@ -104,7 +106,7 @@ describe("TypeScriptLoader", () => {
 
       expect(() =>
         cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts")),
-      ).toThrowError();
+      ).toThrow();
     });
   });
 });
