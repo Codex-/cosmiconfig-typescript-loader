@@ -1,14 +1,14 @@
-const assert = require("node:assert");
+import assert from "node:assert";
 
-const { cosmiconfig } = require("cosmiconfig");
-const { TypeScriptLoader } = require("../dist/cjs/index.cjs");
-TypeScriptLoader();
+import { cosmiconfig } from "cosmiconfig";
+import { TypeScriptLoaderSync } from "../dist/esm/index.mjs";
+TypeScriptLoaderSync();
 
 (async () => {
   try {
     const explorer = cosmiconfig("test", {
       loaders: {
-        ".ts": TypeScriptLoader(),
+        ".ts": TypeScriptLoaderSync(),
       },
     });
 
@@ -18,9 +18,9 @@ TypeScriptLoader();
       cake: "lie",
     });
 
-    console.info("Loaded with CJS successfully");
+    console.info("Loaded with ESM successfully");
   } catch (error) {
-    console.error("Failed to load configuration with CJS");
+    console.error("Failed to load configuration with ESM");
     if (error instanceof TypeError) {
       console.error("Type error occurred:", error.message);
     } else if (error instanceof SyntaxError) {

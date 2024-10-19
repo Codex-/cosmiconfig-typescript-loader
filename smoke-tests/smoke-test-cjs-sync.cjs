@@ -1,14 +1,14 @@
 const assert = require("node:assert");
 
 const { cosmiconfig } = require("cosmiconfig");
-const { TypeScriptLoader } = require("../dist/cjs/index.cjs");
-TypeScriptLoader();
+const { TypeScriptLoaderSync } = require("../dist/cjs/index.cjs");
+TypeScriptLoaderSync();
 
 (async () => {
   try {
     const explorer = cosmiconfig("test", {
       loaders: {
-        ".ts": TypeScriptLoader(),
+        ".ts": TypeScriptLoaderSync(),
       },
     });
 

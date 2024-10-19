@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import path from "node:path";
 
 import { cosmiconfig, cosmiconfigSync } from "cosmiconfig";
 
-import { TypeScriptLoader } from ".";
+import { TypeScriptLoader, TypeScriptLoaderSync } from ".";
 
 describe("TypeScriptLoader", () => {
   const fixturesPath = path.resolve(__dirname, "__fixtures__");
@@ -10,6 +12,7 @@ describe("TypeScriptLoader", () => {
   describe("exports", () => {
     it("should export the loader function as a default", () => {
       expect(typeof TypeScriptLoader).toStrictEqual("function");
+      expect(typeof TypeScriptLoaderSync).toStrictEqual("function");
     });
   });
 
@@ -18,7 +21,7 @@ describe("TypeScriptLoader", () => {
       it("should load a valid TS file", () => {
         const cfg = cosmiconfigSync("test", {
           loaders: {
-            ".ts": TypeScriptLoader(),
+            ".ts": TypeScriptLoaderSync(),
           },
         });
         const loadedCfg = cfg.load(
@@ -33,7 +36,7 @@ describe("TypeScriptLoader", () => {
       it("should throw an error on loading an invalid TS file", () => {
         const cfg = cosmiconfigSync("test", {
           loaders: {
-            ".ts": TypeScriptLoader(),
+            ".ts": TypeScriptLoaderSync(),
           },
         });
 
@@ -78,35 +81,6 @@ describe("TypeScriptLoader", () => {
           expect(error?.name).toStrictEqual("TypeScriptCompileError");
         }
       });
-    });
-  });
-
-  describe("cosmiconfigSync", () => {
-    it("should load a valid TS file", () => {
-      const cfg = cosmiconfigSync("test", {
-        loaders: {
-          ".ts": TypeScriptLoader(),
-        },
-      });
-      const loadedCfg = cfg.load(
-        path.resolve(fixturesPath, "valid.fixture.ts"),
-      );
-
-      expect(typeof loadedCfg!.config).toStrictEqual("object");
-      expect(typeof loadedCfg!.config.test).toStrictEqual("object");
-      expect(loadedCfg!.config.test.cake).toStrictEqual("a lie");
-    });
-
-    it("should throw an error on loading an invalid TS file", () => {
-      const cfg = cosmiconfigSync("test", {
-        loaders: {
-          ".ts": TypeScriptLoader(),
-        },
-      });
-
-      expect(() =>
-        cfg.load(path.resolve(fixturesPath, "invalid.fixture.ts")),
-      ).toThrow();
     });
   });
 });

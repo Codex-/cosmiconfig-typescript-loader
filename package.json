@@ -44,21 +44,22 @@
     "test:coverage": "jest --coverage"
   },
   "engines": {
-    "node": ">=v16"
+    "node": ">=v18"
   },
   "peerDependencies": {
     "@types/node": "*",
-    "cosmiconfig": ">=8.2",
-    "typescript": ">=4"
+    "cosmiconfig": ">=9",
+    "typescript": ">=5"
   },
   "dependencies": {
-    "jiti": "^1.21.6"
+    "jiti": "^2.3.3"
   },
   "devDependencies": {
     "@swc/core": "^1.7.26",
     "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.13",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "auto-changelog": "^2.5.0",
     "chalk": "^5.3.0",
     "cosmiconfig": "^9.0.0",
     "esbuild": "^0.24.0",

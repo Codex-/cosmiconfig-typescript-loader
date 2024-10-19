@@ -2,22 +2,18 @@ const assert = require("node:assert");
 
 (async () => {
   try {
-    const { TypeScriptLoader: esm } = await import("../dist/esm/index.mjs");
-    const { TypeScriptLoader: cjs } = require("../dist/cjs/index.cjs");
+    const { TypeScriptLoaderSync: esm } = await import("../dist/esm/index.mjs");
+    const { TypeScriptLoaderSync: cjs } = require("../dist/cjs/index.cjs");
 
     // Assert the functions loaded by checking their names load and types are correct
-    assert.strictEqual(esm.name === "TypeScriptLoader", true);
+    assert.strictEqual(esm.name === "TypeScriptLoaderSync", true);
     assert.strictEqual(typeof esm === "function", true);
-    assert.strictEqual(cjs.name === "TypeScriptLoader", true);
+    assert.strictEqual(cjs.name === "TypeScriptLoaderSync", true);
     assert.strictEqual(typeof cjs === "function", true);
 
     // Try to create loaders
-    const esmResult = await esm({
-      /* mock config */
-    });
-    const cjsResult = await cjs({
-      /* mock config */
-    });
+    const esmResult = esm({});
+    const cjsResult = cjs({});
 
     assert.strictEqual(
       typeof esmResult,

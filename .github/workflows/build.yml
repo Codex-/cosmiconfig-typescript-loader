@@ -42,6 +42,15 @@ jobs:
       - name: Import with both CJS and ESM
         if: ${{ always() }}
         run: node smoke-tests/smoke-test.js
+      - name: Import synchronously with CJS
+        if: ${{ always() }}
+        run: node smoke-tests/smoke-test-cjs-sync.cjs
+      - name: Import synchronously with ESM
+        if: ${{ always() }}
+        run: node smoke-tests/smoke-test-esm-sync.mjs
+      - name: Import synchronously with both CJS and ESM
+        if: ${{ always() }}
+        run: node smoke-tests/smoke-test-sync.js
       - name: lint
         if: ${{ always() }}
         run: pnpm lint
