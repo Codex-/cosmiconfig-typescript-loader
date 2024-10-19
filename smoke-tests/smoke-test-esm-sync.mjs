@@ -20,9 +20,15 @@ TypeScriptLoaderSync();
 
     console.info("Loaded with ESM successfully");
   } catch (error) {
-    console.error(error);
-    console.debug(error.stack);
-    console.error("Failed to load with ESM");
+    console.error("Failed to load configuration with ESM");
+    if (error instanceof TypeError) {
+      console.error("Type error occurred:", error.message);
+    } else if (error instanceof SyntaxError) {
+      console.error("Syntax error in configuration file:", error.message);
+    } else {
+      console.error("An unexpected error occurred:", error.message);
+    }
+    console.debug("Error stack trace:", error.stack);
     process.exit(1);
   }
 })();

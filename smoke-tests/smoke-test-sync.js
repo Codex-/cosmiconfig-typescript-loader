@@ -12,8 +12,19 @@ const assert = require("node:assert");
     assert.strictEqual(typeof cjs === "function", true);
 
     // Try to create loaders
-    esm();
-    cjs();
+    const esmResult = esm({});
+    const cjsResult = cjs({});
+
+    assert.strictEqual(
+      typeof esmResult,
+      "function",
+      "ESM loader should return an function",
+    );
+    assert.strictEqual(
+      typeof cjsResult,
+      "function",
+      "CJS loader should return an function",
+    );
 
     console.info("Loaded with both CJS and ESM successfully");
   } catch (error) {
