@@ -1,7 +1,8 @@
 import type { LoaderResult, LoaderSync } from "cosmiconfig";
 import { createJiti } from "jiti";
-import type { Jiti, JitiOptions } from "jiti/lib/types.js";
 
+type Jiti = ReturnType<typeof createJiti>;
+type JitiOptions = Parameters<typeof createJiti>[1];
 import { TypeScriptCompileError } from "./typescript-compile-error.js";
 
 type LoaderAsync = (filepath: string, content: string) => Promise<LoaderResult>;
