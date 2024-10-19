@@ -44,15 +44,15 @@
     "test:coverage": "jest --coverage"
   },
   "engines": {
-    "node": ">=v16"
+    "node": ">=v18"
   },
   "peerDependencies": {
     "@types/node": "*",
-    "cosmiconfig": ">=8.2",
-    "typescript": ">=4"
+    "cosmiconfig": ">=9",
+    "typescript": ">=5"
   },
   "dependencies": {
-    "jiti": "^1.21.6"
+    "jiti": "^2.3.3"
   },
   "devDependencies": {
     "@swc/core": "^1.7.26",

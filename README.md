@@ -8,7 +8,7 @@
 
 ## Usage
 
-Simply add `TypeScriptLoader` to the list of loaders for the `.ts` file type:
+Simply add `TypeScriptLoader` to the list of loaders for the `.ts` file type, and `await` loading:
 
 ```ts
 import { cosmiconfig } from "cosmiconfig";
@@ -34,7 +34,7 @@ const explorer = cosmiconfig("test", {
   },
 });
 
-const cfg = explorer.load("./");
+const cfg = await explorer.load("./");
 ```
 
 Or more simply if you only support loading of a TypeScript based configuration file:
@@ -47,6 +47,24 @@ const moduleName = "module";
 const explorer = cosmiconfig("test", {
   loaders: {
     ".ts": TypeScriptLoader(),
+  },
+});
+
+const cfg = await explorer.load("./amazing.config.ts");
+```
+
+### Synchronously loading
+
+With the release of Jiti 2, the synchronous loader has now been deprecated. It can still be used by using the `TypeScriptLoaderSync` export:
+
+```ts
+import { cosmiconfig } from "cosmiconfig";
+import { TypeScriptLoaderSync } from "cosmiconfig-typescript-loader";
+
+const moduleName = "module";
+const explorer = cosmiconfig("test", {
+  loaders: {
+    ".ts": TypeScriptLoaderSync(),
   },
 });
 
