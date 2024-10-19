@@ -32,7 +32,7 @@ jobs:
       - name: test
         id: test
         if: ${{ always() }}
-        run: pnpm test --coverage
+        run: pnpm test:coverage
       - name: lint
         if: ${{ always() }}
         run: pnpm lint
