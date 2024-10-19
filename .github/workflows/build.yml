@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
-      - run: pnpm i
+      - run: pnpm i --frozen-lockfile
       - name: types
         run: pnpm check:types
       - name: build
@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: asdf-vm/actions/install@v3
-      - run: pnpm i
+      - run: pnpm i --frozen-lockfile
       - name: test
         run: pnpm test:coverage
       - name: codecov
