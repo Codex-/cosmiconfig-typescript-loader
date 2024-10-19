@@ -59,15 +59,10 @@ describe("TypeScriptLoader", () => {
     });
 
     it("should throw a TypeScriptCompileError on error", async () => {
-      try {
-        const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
-        await loader(filePath, readFixtureContent(filePath));
-        fail(
-          "Error should be thrown upon failing to transpile an invalid TS file.",
-        );
-      } catch (error: unknown) {
-        expect(error).toBeInstanceOf(TypeScriptCompileError);
-      }
+      const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
+      await expect(
+        loader(filePath, readFixtureContent(filePath)),
+      ).rejects.toThrow(TypeScriptCompileError);
     });
 
     describe("jiti", () => {
@@ -86,7 +81,7 @@ describe("TypeScriptLoader", () => {
 
       it("rethrows an error if it is not an instance of Error", async () => {
         try {
-          await loader("filePath", "readFixtureContent(filePath)");
+          await loader("filePath", "invalidInput");
           fail(
             "Error should be thrown upon failing to transpile an invalid TS file.",
           );
@@ -126,15 +121,10 @@ describe("TypeScriptLoader", () => {
     });
 
     it("should throw a TypeScriptCompileError on error", () => {
-      try {
-        const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
-        loader(filePath, readFixtureContent(filePath));
-        fail(
-          "Error should be thrown upon failing to transpile an invalid TS file.",
-        );
-      } catch (error: unknown) {
-        expect(error).toBeInstanceOf(TypeScriptCompileError);
-      }
+      const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
+      expect((): unknown =>
+        loader(filePath, readFixtureContent(filePath)),
+      ).toThrow(TypeScriptCompileError);
     });
 
     describe("jiti", () => {
@@ -152,7 +142,7 @@ describe("TypeScriptLoader", () => {
 
       it("rethrows an error if it is not an instance of Error", () => {
         try {
-          loader("filePath", "readFixtureContent(filePath)");
+          loader("filePath", "invalidInput");
           fail(
             "Error should be thrown upon failing to transpile an invalid TS file.",
           );
