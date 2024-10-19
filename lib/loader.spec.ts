@@ -37,7 +37,9 @@ describe("TypeScriptLoader", () => {
 
   it("should fail on parsing an invalid TS file", () => {
     const filePath = path.resolve(fixturesPath, "invalid.fixture.ts");
-    expect(() => loader(filePath, readFixtureContent(filePath))).toThrowError();
+    expect((): unknown =>
+      loader(filePath, readFixtureContent(filePath)),
+    ).toThrow();
   });
 
   it("should use the same instance of jiti across multiple calls", () => {
@@ -66,9 +68,9 @@ describe("TypeScriptLoader", () => {
 
     beforeEach(() => {
       stub = jest.spyOn(jiti, "default").mockImplementation((() => () => {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
         throw unknownError;
-      }) as any);
+      }) as never);
 
       loader = TypeScriptLoader();
     });
