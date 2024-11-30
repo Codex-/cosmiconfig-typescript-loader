@@ -52,6 +52,6 @@ jobs:
             --ci
       - name: codecov # Perform after version publishing
         if: steps.test.outcome == 'success'
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
