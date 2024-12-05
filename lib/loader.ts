@@ -11,6 +11,10 @@ export function TypeScriptLoader(options?: JitiOptions): LoaderAsync {
   const loader: Jiti = createJiti("", { interopDefault: true, ...options });
   return async (path: string, _content: string): Promise<LoaderResult> => {
     try {
+      // Because the import resolved as `unknown`, in the union of `unknown & { default?: unknown }`
+      // `unknown` is the loosest type, however, we know it's an imported module possibly with a
+      // default export set.
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const result = (await loader.import(path)) as { default?: unknown };
 
       // `default` is used when exporting using export default, some modules
