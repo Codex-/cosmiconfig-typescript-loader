@@ -37,7 +37,7 @@
     "check:types": "tsc -p tsconfig.json",
     "format": "pnpm format:check --write",
     "format:check": "prettier --check \"{**/*,*}.{js,cjs,mjs,ts}\"",
-    "lint": "eslint",
+    "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "release": "release-it",
     "test": "jest",
