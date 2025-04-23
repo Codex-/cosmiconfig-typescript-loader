@@ -19,6 +19,7 @@ export function TypeScriptLoader(options?: JitiOptions): LoaderAsync {
 
       // `default` is used when exporting using export default, some modules
       // may still use `module.exports` or if in TS `export = `
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
       return result.default || result;
     } catch (error) {
       if (error instanceof Error) {
@@ -42,6 +43,7 @@ export function TypeScriptLoaderSync(options?: JitiOptions): LoaderSync {
 
       // `default` is used when exporting using export default, some modules
       // may still use `module.exports` or if in TS `export = `
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
       return result.default || result;
     } catch (error) {
       if (error instanceof Error) {
