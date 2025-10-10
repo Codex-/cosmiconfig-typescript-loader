@@ -17,7 +17,7 @@ const FORMATS = ["cjs", "esm"];
 /**
  * @type {import('esbuild').BuildOptions['target']}
  */
-const TARGETS = ["node16", "node18", "node20", "esnext"];
+const TARGETS = ["node16", "node18", "node20", "node22", "node24", "esnext"];
 
 const ROOT = path.resolve(__dirname, "..");
 const SOURCES_ROOT = path.resolve(ROOT, "./lib");
