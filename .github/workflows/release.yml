@@ -12,17 +12,23 @@ on:
           - minor
           - major
 
+permissions:
+  id-token: write # Required for NPM OIDC
+
 jobs:
   release:
     env:
       CI: true
       GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0 # Need history for changelog generation
+      - name: config git user
+        run: |
+          git config --global user.name ${{ secrets.ACTION_GITHUB_USERNAME }};
+          git config --global user.email ${{ secrets.ACTION_GITHUB_EMAIL }};
       - uses: jdx/mise-action@v3
       - run: pnpm i --frozen-lockfile
       - name: types
@@ -39,12 +45,8 @@ jobs:
       - name: style
         if: ${{ always() }}
         run: pnpm format:check
-      - name: npm registry auth
-        run: pnpm config set "//registry.npmjs.org/:_authToken" ${{ env.NPM_TOKEN }}
-      - name: config git user
-        run: |
-          git config --global user.name ${{ secrets.ACTION_GITHUB_USERNAME }};
-          git config --global user.email ${{ secrets.ACTION_GITHUB_EMAIL }};
+      - name: registry config
+        run: pnpm config set registry="https://registry.npmjs.org"
       - name: perform release
         run: |
           pnpm release \
