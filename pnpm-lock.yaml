@@ -12,62 +12,62 @@ importers:
         specifier: '*'
         version: 24.7.1
       jiti:
-        specifier: ^2.6.1
+        specifier: 2.6.1
         version: 2.6.1
     devDependencies:
       '@eslint/js':
-        specifier: ^9.37.0
+        specifier: 9.37.0
         version: 9.37.0
       '@swc/core':
-        specifier: ^1.13.5
+        specifier: 1.13.5
         version: 1.13.5
       '@swc/jest':
-        specifier: ^0.2.39
+        specifier: 0.2.39
         version: 0.2.39(@swc/core@1.13.5)
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 30.0.0
         version: 30.0.0
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.46.0
+        specifier: 8.46.0
         version: 8.46.0(@typescript-eslint/parser@8.46.0(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
       auto-changelog:
-        specifier: ^2.5.0
+        specifier: 2.5.0
         version: 2.5.0
       chalk:
-        specifier: ^5.6.2
+        specifier: 5.6.2
         version: 5.6.2
       cosmiconfig:
-        specifier: ^9.0.0
+        specifier: 9.0.0
         version: 9.0.0(typescript@5.9.3)
       esbuild:
-        specifier: ^0.25.10
+        specifier: 0.25.10
         version: 0.25.10
       eslint:
-        specifier: ^9.37.0
+        specifier: 9.37.0
         version: 9.37.0(jiti@2.6.1)
       eslint-config-prettier:
-        specifier: ^10.1.8
+        specifier: 10.1.8
         version: 10.1.8(eslint@9.37.0(jiti@2.6.1))
       eslint-import-resolver-typescript:
-        specifier: ^4.4.4
+        specifier: 4.4.4
         version: 4.4.4(eslint-plugin-import-x@4.16.1(@typescript-eslint/utils@8.46.0(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1)))(eslint@9.37.0(jiti@2.6.1))
       eslint-plugin-import-x:
-        specifier: ^4.16.1
+        specifier: 4.16.1
         version: 4.16.1(@typescript-eslint/utils@8.46.0(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))
       jest:
-        specifier: ^30.2.0
+        specifier: 30.2.0
         version: 30.2.0(@types/node@24.7.1)
       prettier:
-        specifier: ^3.6.2
+        specifier: 3.6.2
         version: 3.6.2
       release-it:
-        specifier: ^19.0.5
+        specifier: 19.0.5
         version: 19.0.5(@types/node@24.7.1)
       typescript:
-        specifier: ^5.9.3
+        specifier: 5.9.3
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.46.0
+        specifier: 8.46.0
         version: 8.46.0(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
 
 packages:
