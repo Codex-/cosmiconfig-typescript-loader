@@ -69,7 +69,7 @@
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-import-x": "4.16.1",
     "jest": "30.2.0",
-    "prettier": "3.6.2",
+    "prettier": "3.7.3",
     "release-it": "19.0.6",
     "typescript": "5.9.3",
     "typescript-eslint": "8.48.0"
