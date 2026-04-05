@@ -29,7 +29,7 @@ jobs:
         run: |
           git config --global user.name ${{ secrets.ACTION_GITHUB_USERNAME }};
           git config --global user.email ${{ secrets.ACTION_GITHUB_EMAIL }};
-      - uses: jdx/mise-action@v3
+      - uses: jdx/mise-action@v4
       - run: pnpm i --frozen-lockfile
       - name: types
         run: pnpm check:types
