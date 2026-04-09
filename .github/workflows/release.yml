@@ -20,7 +20,6 @@ jobs:
   release:
     env:
       CI: true
-      GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -49,10 +48,9 @@ jobs:
       - name: registry config
         run: pnpm config set registry="https://registry.npmjs.org"
       - name: perform release
-        run: |
-          pnpm release \
-            ${{ github.event.inputs.version }} \
-            --ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm release --ci ${{ github.event.inputs.version }}
       - name: codecov # Perform after version publishing
         if: steps.test.outcome == 'success'
         uses: codecov/codecov-action@v6
