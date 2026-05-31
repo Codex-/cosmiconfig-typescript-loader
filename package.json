@@ -52,27 +52,27 @@
     "typescript": ">=5"
   },
   "dependencies": {
-    "jiti": "2.6.1"
+    "jiti": "2.7.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@swc/core": "1.15.32",
+    "@swc/core": "1.15.40",
     "@swc/jest": "0.2.39",
     "@types/jest": "30.0.0",
-    "@typescript-eslint/eslint-plugin": "8.59.1",
-    "auto-changelog": "2.5.0",
+    "@typescript-eslint/eslint-plugin": "8.60.0",
+    "auto-changelog": "2.6.0",
     "chalk": "5.6.2",
     "cosmiconfig": "9.0.1",
     "esbuild": "0.28.0",
-    "eslint": "10.2.1",
+    "eslint": "10.4.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-import-x": "4.16.2",
-    "jest": "30.3.0",
+    "jest": "30.4.2",
     "prettier": "3.8.3",
-    "release-it": "20.0.1",
+    "release-it": "20.2.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.59.1"
+    "typescript-eslint": "8.60.0"
   },
   "keywords": [
     "cosmiconfig",
